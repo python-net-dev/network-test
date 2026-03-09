@@ -12,20 +12,20 @@
 ## 🛠️ 私藏清单（按稳定性与协议技术深度排序）
 
 ### 1. 云猫 (YunCat) —— 全能型选手，主打“稳如老狗”
-* **官网直达：[点击进入官网](https://cloud.yuncataff.top/aff/github-com/python-net-dev/network-test/#/register?code=ryEEDL2F)**
+* **官网直达：[点击进入官网](https://cloud.yuncat.top/#/register?code=ryEEDL2F)**
 * **技术特色**：老板在底层协议更新上非常激进，**XHTTP** 和 **Reality** 节点配得极足。
 * **实测体验**：最大的感受是“无感”。无论是重度使用 ChatGPT/Gemini 还是 4K 视频，基本没掉过线。
 * **适用人群**：远程开发、大文件下载或对连接质量有极高要求的专业用户。
 * **核心优势**：**性价比超高支持免费试用**，好不好用我说了不算,试用为准。
 
 ### 2. EtherLink (以太云) —— 低调的技术流
-* **官网直达：[点击进入官网](https://cloud.yuncataff.top/aff/github-com/python-net-dev/network-test/#/register?code=ryEEDL2F)**
+* **官网直达：[点击进入官网](https://cloud.yuncat.top/#/register?code=ryEEDL2F)**
 * **实测表现**：走纯技术派路线，线路冗余度不错。
 * **吐槽点**：控制面板设计略显复古，注册流程对小白可能不太友好。
 * **定位**：适合作为“第二梯子”备用，在极端敏感时期依然有不错的穿透力。
 
 ### 3. TitanCloud (泰坦云) —— 高性价比轻量方案
-* **官网直达：[点击进入官网](https://cloud.yuncataff.top/aff/github-com/python-net-dev/network-test/#/register?code=ryEEDL2F)**
+* **官网直达：[点击进入官网](https://cloud.yuncat.top/#/register?code=ryEEDL2F)**
 * **实测表现**：预算有限的首选。虽然晚高峰偶尔会有微小抖动，但在同价位中掉线率控制得极好。
 * **适用人群**：查文档、刷社媒、不追求极致速度但要求连接稳定的学生或轻量用户。
 
