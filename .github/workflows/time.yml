@@ -1,0 +1,61 @@
+name: Daily Repo Active Bot (Smart Version)
+
+on:
+  schedule:
+    - cron: '0 3 * * *' # 每天北京时间 11:00 运行
+  workflow_dispatch:
+
+# 添加并发控制，防止手动触发与定时任务同时运行导致冲突
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update-active-log:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # 浅克隆：只拉取最近一次提交，大幅提升 Checkout 速度
+
+      - name: Smart Update README
+        run: |
+          # 1. 使用系统时区变量，比计算 "-d '+8 hours'" 更符合 POSIX 标准且不易出错
+          export TZ='Asia/Shanghai'
+          CURRENT_DATE=$(date +"%Y-%m-%d %H:%M:%S")
+          TARGET_FILE="README.md"
+          
+          # 2. 容错处理：确保文件存在，防止 grep 或 sed 找不到文件报错
+          touch "$TARGET_FILE"
+          
+          # 3. 检查并更新
+          if grep -q "最后技术支持更新" "$TARGET_FILE"; then
+            # 优化 sed：使用正则替换 (s命令) 替代整行替换 (c命令)，避免意外覆盖前置格式
+            sed -i -E "s/最后技术支持更新：.*/最后技术支持更新：$CURRENT_DATE (UTC+8)/" "$TARGET_FILE"
+          else
+            # 保持原有逻辑，追加新行
+            echo -e "\n---\n### 📅 自动维护日志 (Daily Tech Support Update)\n\n最后技术支持更新：$CURRENT_DATE (UTC+8)\n" >> "$TARGET_FILE"
+          fi
+
+      - name: Commit and Push
+        run: |
+          # 规范身份：使用 GitHub 官方 Bot 账号信息，提交记录会带有官方 "bot" 徽章
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          git add README.md
+          
+          if git diff --staged --quiet; then
+            echo "No changes detected. Skipping commit."
+            exit 0
+          else
+            git commit -m "docs: daily maintenance sync $CURRENT_DATE"
+            
+            # 冲突防御：提交前先 rebase 拉取最新代码，防止运行期间有其他合并导致 push 失败
+            git pull --rebase origin HEAD
+            git push
+          fi
